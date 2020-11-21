@@ -30,8 +30,13 @@
             <a class="nav-link" href="/Home.html">HOME</a>
           </li>
           <li class="nav-item mx-1 align-items-center d-flex justify-content-center">
-            <a class="nav-link" href="/Courses.html">COURSES</a>
+            <a class="nav-link" href="/Profile.html" id="ProfileNav"> PROFILE<br></a>
           </li>
+          <script> if(localStorage.getItem('name') == "Johnsmith932")
+						{
+							document.getElementById("ProfileNav").href = "/Johnsmith932.html"
+						}
+					</script>
           <li class="nav-item mx-1 align-items-center d-flex justify-content-center">
             <a class="nav-link" href="/Profile.html"> PROFILE<br></a>
           </li>
@@ -289,7 +294,6 @@
       });
     });
   </script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>
