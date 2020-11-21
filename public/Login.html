@@ -348,48 +348,64 @@
         </div>
       </div>
     </div>
-  </div>
-  <script>
-    async function onSubmit() {
-      let fail = false
-      let username = document.getElementById("name")
-      if (username.value) {
-        username.style.backgroundColor = "white"
-        username = username.value
-      } else {
-        username.classList.add("error")
-        setTimeout(() => {
-          username.classList.remove("error")
-        }, 5000)
-        fail = true
-      }
-      let password = document.getElementById("pw")
-      if (password.value) {
-        password.style.backgroundColor = "white"
-        password = password.value
-      } else {
-        password.classList.add("error")
-        setTimeout(() => {
-          password.classList.remove("error")
-        }, 5000)
-        fail = true
-      }
-      if (fail) {
-        return
-      }
-      let response = await fetch("/login", {
-        method: "POST",
-        body: JSON.stringify({
-          name: username,
-          password: password
-        }),
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        }
-      }).then(res => res.json())
-      if (response) {
-        for (let data in response) {
-          localStorage.setItem(data, JSON.stringify(response[data]))
+    <script>
+        async function onSubmit() {
+            let fail = false
+            let username = document.getElementById("name")
+            if (username.value) {
+                username.style.backgroundColor = "white"
+                username = username.value
+            } else {
+                username.classList.add("error")
+                  setTimeout(() => {
+                    username.classList.remove("error")
+                  }, 5000)
+                fail = true
+            }
+            let password = document.getElementById("pw")
+            if (password.value) {
+                password.style.backgroundColor = "white"
+                password = password.value
+            } else {
+                password.classList.add("error")
+                  setTimeout(() => {
+                    password.classList.remove("error")
+                  }, 5000)
+                fail = true
+            }
+
+            if (fail) {
+                return
+            }
+
+            let response = await fetch("/login", {
+                method: "POST",
+                body: JSON.stringify({
+                    name: username,
+                    password: password
+                }),
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                }
+            }).then(res => res.json())
+
+            if (response) {
+                for (let data in response) {
+                    let thing = response[data]
+                    localStorage.setItem(data, typeof thing === "object" ? JSON.stringify(thing) : thing)
+                }
+
+                location.href = "/Home.html"
+            } else {
+                document.getElementById("name").classList.add("error")
+                  setTimeout(() => {
+                    document.getElementById("name").classList.remove("error")
+                  }, 5000)
+                document.getElementById("pw").classList.add("error")
+                  setTimeout(() => {
+                    document.getElementById("pw").classList.remove("error")
+                  }, 5000)
+            }
         }
         location.href = "/Home.html"
       } else {
