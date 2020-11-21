@@ -325,7 +325,7 @@
     });
   </script>
   <script>
-    var ws = new WebSocket("ws://localhost:8080")
+    var ws = new WebSocket(location.origin.replace(/http/, "ws"))
     var container = document.getElementById("messageContainer")
     let name = localStorage.getItem("name")
     let logButton = document.getElementById("login")
